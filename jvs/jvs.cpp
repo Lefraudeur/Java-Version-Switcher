@@ -142,7 +142,7 @@ std::filesystem::path jvs::getPathForVersion(const char* version)
 bool jvs::addJavaPath(const std::filesystem::path& path)
 {
 	std::string newPath = "PATH=" + path.string() + ";" + removeExistingJavaPath();
-	if (putenv(newPath.c_str()) != 0)
+	if (putenv((char*)newPath.c_str()) != 0)
 	{
 		std::cerr << "[Error] Failed to set PATH env variable" << std::endl;
 		return false;
@@ -153,7 +153,7 @@ bool jvs::addJavaPath(const std::filesystem::path& path)
 bool jvs::setJavaHome(const std::filesystem::path& path)
 {
 	std::string JAVA_HOME = "JAVA_HOME=" + path.string();
-	if (putenv(JAVA_HOME.c_str()) != 0)
+	if (putenv((char*)JAVA_HOME.c_str()) != 0)
 	{
 		std::cerr << "[Error] Failed to set JAVA_HOME env variable" << std::endl;
 		return false;
