@@ -141,10 +141,14 @@
   <ItemGroup>
     <ClCompile Include="Include\whereami\whereami.c" />
     <ClCompile Include="jvs\jvs.cpp" />
+    <ClCompile Include="jvs\jvsutils.cpp" />
+    <ClCompile Include="jvs\process.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="jvs\jvs.h" />
+    <ClInclude Include="jvs\jvs.hpp" />
+    <ClInclude Include="jvs\jvsutils.hpp" />
+    <ClInclude Include="jvs\process.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

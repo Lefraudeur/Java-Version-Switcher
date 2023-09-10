@@ -24,9 +24,21 @@
     <ClCompile Include="Include\whereami\whereami.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="jvs\process.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="jvs\jvsutils.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="jvs\jvs.h">
+    <ClInclude Include="jvs\jvs.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="jvs\process.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="jvs\jvsutils.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

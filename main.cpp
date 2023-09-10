@@ -1,5 +1,5 @@
 #include <iostream>
-#include "jvs/jvs.h"
+#include "jvs/jvs.hpp"
 
 int main(int size, char* args[])
 {
@@ -17,12 +17,5 @@ int main(int size, char* args[])
 	) 
 		return -1;
 	std::cout << "[Success] Java version switched to " << args[1] << std::endl;
-	std::cout << "[java " << args[1] << "] " << std::filesystem::current_path().string() << ">";
-	std::string command{};
-	while (std::getline(std::cin, command))
-	{
-		std::system(command.c_str());
-		std::cout << "[java " << args[1] << "] " << std::filesystem::current_path().string() << ">";
-	}
 	return 0;
 }
