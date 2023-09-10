@@ -18,5 +18,3 @@ In this example config, the command `jvs 17` will delete existing java dirs in t
 
 ### Usage:
 `jvs <javaVersion>`
-
-This program might also work on other os than windows such as linux, although it hasn't been tested.
