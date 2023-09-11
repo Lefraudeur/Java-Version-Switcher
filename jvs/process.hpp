@@ -3,6 +3,8 @@
 #include <string>
 namespace jvs
 {
+	DWORD getParentProcessId();
+
 	class process
 	{
 	public:

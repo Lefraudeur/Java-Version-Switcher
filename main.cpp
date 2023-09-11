@@ -9,9 +9,7 @@ int main(int size, char* args[])
 		return -1;
 	}
 	const std::filesystem::path& path = jvs::getPathForVersion(args[1]);
-	DWORD consolePid = 0;
-	GetWindowThreadProcessId(GetConsoleWindow(), &consolePid);
-	jvs::process proc(consolePid);
+	jvs::process proc(jvs::getParentProcessId());
 	if
 	(
 		path.empty()

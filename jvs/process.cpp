@@ -2,6 +2,28 @@
 #include <tlhelp32.h>
 #include <iostream>
 
+DWORD jvs::getParentProcessId()
+{
+	DWORD parentProcessId = 0;
+	DWORD currentPID = GetCurrentProcessId();
+	HANDLE allProcesses = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	PROCESSENTRY32 processEntry{};
+	processEntry.dwSize = sizeof(PROCESSENTRY32);
+	Process32First(allProcesses, &processEntry);
+	do
+	{
+		if (processEntry.th32ProcessID != currentPID)
+			continue;
+		parentProcessId = processEntry.th32ParentProcessID;
+		break;
+	} while (Process32Next(allProcesses, &processEntry));
+	CloseHandle(allProcesses);
+	if (!parentProcessId)
+	{
+		std::cerr << "[Error] Failed to get parent PID" << std::endl;
+	}
+	return parentProcessId;
+}
 
 jvs::process::process(DWORD pid) :
 	processId(pid)
