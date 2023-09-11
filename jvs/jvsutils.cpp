@@ -1,7 +1,7 @@
 #include "jvsutils.hpp"
-#include <whereami/whereami.h>
 #include <iostream>
 #include <fstream>
+#include <Windows.h>
 
 bool jvs::createJson()
 {
@@ -90,14 +90,10 @@ std::string jvs::removeExistingJavaPath()
 
 	return path;
 }
+
 std::filesystem::path jvs::getExeDir()
 {
-	int path_size = wai_getExecutablePath(nullptr, 0, nullptr);
-	char* path_str = new char[path_size + 1] {0};
-	wai_getExecutablePath(path_str, path_size, nullptr);
-	path_str[path_size] = '\0';
-	std::filesystem::path path(path_str);
-	path = path.parent_path();
-	delete[] path_str;
-	return path;
+	char fileName[FILENAME_MAX + 1] = { 0 };
+	GetModuleFileNameA(nullptr, fileName, FILENAME_MAX + 1);
+	return std::filesystem::path(fileName).parent_path();
 }

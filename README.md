@@ -4,6 +4,7 @@ A quick way to change between java versions
 
 ### Installation:
 Put jvs.exe in a folder, and add that folder to your system PATH environnement variable.
+You can also put jvs.exe in C:\Windows, but you will have to create the config file with admin rights, or launch jvs in admin rights the first time.
 
 ### Config:
 ```

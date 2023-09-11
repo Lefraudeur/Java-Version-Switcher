@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Include\whereami\whereami.c" />
     <ClCompile Include="jvs\jvs.cpp" />
     <ClCompile Include="jvs\jvsutils.cpp" />
     <ClCompile Include="jvs\process.cpp" />

@@ -9,11 +9,15 @@ int main(int size, char* args[])
 		return -1;
 	}
 	const std::filesystem::path& path = jvs::getPathForVersion(args[1]);
+	DWORD consolePid = 0;
+	GetWindowThreadProcessId(GetConsoleWindow(), &consolePid);
+	jvs::process proc(consolePid);
 	if
 	(
 		path.empty()
-		|| !jvs::addJavaPath(path.string() + (path.has_filename() ? "/bin" : "bin"))
-		|| !jvs::setJavaHome(path)
+		|| !proc
+		|| !jvs::addJavaPath(proc, path.string() + (path.has_filename() ? "/bin" : "bin"))
+		|| !jvs::setJavaHome(proc, path)
 	) 
 		return -1;
 	std::cout << "[Success] Java version switched to " << args[1] << std::endl;

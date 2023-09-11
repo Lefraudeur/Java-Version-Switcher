@@ -3,8 +3,6 @@
 #include <string>
 namespace jvs
 {
-	DWORD getParentProcessId();
-
 	class process
 	{
 	public:
@@ -12,7 +10,6 @@ namespace jvs
 		~process();
 
 		operator bool() const;
-		HMODULE getModule(const std::wstring& moduleName) const;
 		bool _putenv(const std::string& env);
 	private:
 		DWORD processId = 0;

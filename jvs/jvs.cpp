@@ -1,12 +1,6 @@
 #include "jvs.hpp"
 #include "jvsutils.hpp"
-#include "process.hpp"
 #include <iostream>
-
-namespace
-{
-	jvs::process proc(jvs::getParentProcessId());
-}
 
 std::filesystem::path jvs::getPathForVersion(const char* version)
 {
@@ -34,7 +28,7 @@ std::filesystem::path jvs::getPathForVersion(const char* version)
 	return std::filesystem::path();
 }
 
-bool jvs::addJavaPath(const std::filesystem::path& path)
+bool jvs::addJavaPath(jvs::process& proc, const std::filesystem::path& path)
 {
 	std::string newPath = "PATH=" + path.string() + ";" + removeExistingJavaPath();
 	if (!proc._putenv(newPath))
@@ -45,7 +39,7 @@ bool jvs::addJavaPath(const std::filesystem::path& path)
 	return true;
 }
 
-bool jvs::setJavaHome(const std::filesystem::path& path)
+bool jvs::setJavaHome(jvs::process& proc, const std::filesystem::path& path)
 {
 	std::string JAVA_HOME = "JAVA_HOME=" + path.string();
 	if (!proc._putenv(JAVA_HOME))

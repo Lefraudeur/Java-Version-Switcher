@@ -21,9 +21,6 @@
     <ClCompile Include="jvs\jvs.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Include\whereami\whereami.c">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="jvs\process.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
