@@ -18,3 +18,11 @@ In this example config, the command `jvs 17` will delete existing java dirs in t
 
 ### Usage:
 `jvs <javaVersion>`
+
+### Info:
+This does not change the system wide PATH env variable, it calls _putenv in the parent process (so cmd.exe), so that only that process java path will be changed.
+It uses game hacking techniques with VirtualAllocEx, WriteProcessMemory and CreateRemoteThread in order to achieve that.
+
+#### Why a c++ program instead of a simple batch file ?
+Because c++ is fun, and it allows to have a cool json config file, as well as the ability to remove existing java paths to avoid conflicts.
+Overall it's fast, and it will allow more features in the future, such as a jdk downloader.
