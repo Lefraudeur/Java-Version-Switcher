@@ -1,4 +1,4 @@
-#include <json.hpp>
+﻿#include <json.hpp>
 
 namespace jvs
 {
@@ -6,6 +6,4 @@ namespace jvs
 	nlohmann::json getJson();
 	std::string removeExistingJavaPath();
 	std::filesystem::path getExeDir();
-
-	static const std::string json_path = getExeDir().string() + "/jvs.json";
 }

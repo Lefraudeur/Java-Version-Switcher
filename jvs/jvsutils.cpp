@@ -1,7 +1,9 @@
-#include "jvsutils.hpp"
+﻿#include "jvsutils.hpp"
 #include <iostream>
 #include <fstream>
 #include <Windows.h>
+
+static const std::string json_path = jvs::getExeDir().string() + "/jvs.json";
 
 bool jvs::createJson()
 {

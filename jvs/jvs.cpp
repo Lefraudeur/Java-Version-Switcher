@@ -1,6 +1,7 @@
-#include "jvs.hpp"
+﻿#include "jvs.hpp"
 #include "jvsutils.hpp"
 #include <iostream>
+#include "downloader/downloader.hpp"
 
 std::filesystem::path jvs::getPathForVersion(const char* version)
 {
@@ -48,4 +49,22 @@ bool jvs::setJavaHome(jvs::process& proc, const std::filesystem::path& path)
 		return false;
 	}
 	return true;
+}
+
+bool jvs::handleDownload(std::string versionName)
+{
+	static std::unordered_map<std::string, URL> versions =
+	{
+		{"zulu17", URL("https://cdn.azul.com/zulu/bin/zulu17.44.53-ca-jdk17.0.8.1-win_x64.zip")}
+	};
+
+	try
+	{
+		return versions.at(versionName).download(jvs::getExeDir().string() + "/" + versionName + ".zip");
+	}
+	catch (...)
+	{
+		std::cerr << "[Error] No download url found for this version" << std::endl;
+	}
+	return false;
 }

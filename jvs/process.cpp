@@ -1,4 +1,4 @@
-#include "process.hpp"
+﻿#include "process.hpp"
 #include <tlhelp32.h>
 #include <iostream>
 
@@ -51,12 +51,8 @@ bool jvs::process::_putenv(const std::string& env)
 	HMODULE msvcrtdll = GetModuleHandleA("msvcrt.dll");
 	if (!msvcrtdll)
 	{
-		msvcrtdll = LoadLibraryA("msvcrt.dll");
-		if (!msvcrtdll)
-		{
-			std::cerr << "[Error] Failed to load msvcrt.dll" << std::endl;
-			return false;
-		}
+		std::cerr << "[Error] Failed to load msvcrt.dll" << std::endl;
+		return false;
 	}
 	FARPROC _putenv_addr = GetProcAddress(msvcrtdll, "_putenv");
 	if (!_putenv_addr)
