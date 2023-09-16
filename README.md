@@ -30,6 +30,7 @@ The command `jvs install zulu17` will download the zip file at `https://cdn.azul
 
 ### <u>Usage:</u>
 `jvs <javaVersion>`
+
 `jvs install <javaVersion>`
 
 ### <u>Info:</u>
