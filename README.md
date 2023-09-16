@@ -32,6 +32,12 @@ The config `jvs.json` needs to be in the same folder as `jvs.exe`.
 This does not change the system wide PATH env variable, it calls _putenv in the parent process (so cmd.exe), so that only that process java path will be changed.
 It uses game hacking techniques with VirtualAllocEx, WriteProcessMemory and CreateRemoteThread in order to achieve that.
 
+#### External Libraries used:
+- nlohmann json: https://github.com/nlohmann/json (for the json config jvs.json)
+- curl: https://github.com/curl/curl (to download jdk zip)
+- miniz: https://github.com/richgel999/miniz (to extract downloaded jdk zip)
+- indicators: https://github.com/p-ranav/indicators (for the progress bar)
+
 #### Why a c++ program instead of a simple batch/powershell script ?
 Because c++ is fun, and it allows to have a cool json config file, as well as the ability to remove existing java paths to avoid conflicts.
 Overall it's fast, and it will allow more features in the future.
