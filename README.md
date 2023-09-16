@@ -19,9 +19,13 @@ Make sure jvs.exe is in a folder where it has read/write permissions.
 }
 ```
 The config `jvs.json` needs to be in the same folder as `jvs.exe`.
-<br/>In this example config, the command `jvs 17` will delete existing java dirs in the `PATH` env variable, and add the directory `C:/Program Files/Zulu/zulu-17/bin` to `PATH`.
+
+
+In this example config, the command `jvs 17` will delete existing java dirs in the `PATH` env variable, and add the directory `C:/Program Files/Zulu/zulu-17/bin` to `PATH`.
 <br/>It will also set `JAVA_HOME` to `C:/Program Files/Zulu/zulu-17`.
-<br/>The command `jvs install zulu17` will download the zip file at `https://cdn.azul.com/zulu/bin/zulu17.44.53-ca-jdk17.0.8.1-win_x64.zip` and extract it to a folder `zulu17` in the same place as `jvs.exe`.
+
+
+The command `jvs install zulu17` will download the zip file at `https://cdn.azul.com/zulu/bin/zulu17.44.53-ca-jdk17.0.8.1-win_x64.zip` and extract it to a folder `zulu17` in the same place as `jvs.exe`.
 <br/>It will then add that folder to `jvs.json` so that you can `jvs zulu17`.
 
 ### <u>Usage:</u>
