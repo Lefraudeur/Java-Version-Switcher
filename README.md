@@ -33,7 +33,7 @@ The command `jvs install zulu17` will download the zip file at `https://cdn.azul
 
 ### <u>Info:</u>
 This does not change the system wide PATH env variable, it calls _putenv in the parent process (so cmd.exe), so that only that process java path will be changed.
-It uses game hacking techniques with VirtualAllocEx, WriteProcessMemory and CreateRemoteThread in order to achieve that.
+It uses VirtualAllocEx, WriteProcessMemory and CreateRemoteThread in order to achieve that.
 
 #### External Libraries used:
 - nlohmann json: https://github.com/nlohmann/json (for the json config jvs.json)
