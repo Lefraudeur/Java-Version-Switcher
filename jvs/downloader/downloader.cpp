@@ -2,7 +2,6 @@
 #include <indicators/progress_bar.hpp>
 #include <indicators/cursor_control.hpp>
 #include <fstream>
-#include <unordered_map>
 
 jvs::URL::URL(const std::string& a_url) :
 	url(a_url)
@@ -18,30 +17,32 @@ bool jvs::URL::download(const std::filesystem::path& path)
 	CURL* curl = curl_easy_init();
 	if (!curl)
 	{
-		std::cerr << "[Error] Failed to init curl, this shouldn't happen" << std::endl;
+		std::cerr << "[Error] Failed to init curl, this shouldn't happen\n";
 	}
-	std::ofstream file(path);
+	if (std::filesystem::exists(path))
+		return true;
+	std::ofstream file(path, std::ios::binary);
 	if (!file)
 	{
-		std::cerr << "[Error] Failed to create file " << path.string() << std::endl;
+		std::cerr << "[Error] Failed to create file " << path.string() << '\n';
 		curl_easy_cleanup(curl);
 		return false;
 	}
 	bool curlSuccess = false;
 
-	show_console_cursor(false);
 	ProgressBar bar
 	{
 	  option::BarWidth{50},
-	  option::Start{"\rDownloading Zip [ "},
+	  option::Start{"\rDownloading Zip ["},
 	  option::Fill{"="},
 	  option::Lead{">"},
 	  option::ShowPercentage(true),
 	  option::ShowElapsedTime(true),
 	  option::ForegroundColor(Color::yellow),
 	  option::Remainder{" "},
-	  option::End{" ]"}
+	  option::End{"]"}
 	};
+	show_console_cursor(false);
 
 	if
 	(
@@ -55,9 +56,9 @@ bool jvs::URL::download(const std::filesystem::path& path)
 	{
 		curlSuccess = errorCheck(curl_easy_perform(curl));
 	}
-	show_console_cursor(true);
 	file.close();
 	curl_easy_cleanup(curl);
+	show_console_cursor(true);
 	return curlSuccess;
 }
 
@@ -79,14 +80,19 @@ bool jvs::URL::errorCheck(CURLcode code)
 	}
 	else
 	{
-		std::cerr << "[Error] " << curl_easy_strerror(code) << std::endl;
+		std::cerr << "[Error] " << curl_easy_strerror(code) << '\n';
 		return false;
 	}
 }
 
 int jvs::URL::xfer_callback(void* clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow)
 {
-	indicators::ProgressBar* block = (indicators::ProgressBar*)clientp;
-	if (dltotal > 1.0) block->set_progress(((double)dlnow / (double)dltotal) * 100.0);
+	indicators::ProgressBar* bar = (indicators::ProgressBar*)clientp;
+	if (dltotal >= dlnow && dltotal > 0)
+	{
+		size_t percentage = size_t((double(dlnow) / double(dltotal)) * 100.0);
+		if (!bar->is_completed())
+			bar->set_progress(percentage);
+	}
 	return 0;
 }

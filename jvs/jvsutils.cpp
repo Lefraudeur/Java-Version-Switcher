@@ -3,17 +3,22 @@
 #include <fstream>
 #include <Windows.h>
 
-static const std::string json_path = jvs::getExeDir().string() + "/jvs.json";
+const std::string jvs::json_path = jvs::getExeDir().string() + "/jvs.json";
 
 bool jvs::createJson()
 {
-	std::cout << "[Warning] json config not found" << std::endl
-		<< "[Warning] creating jvs.json ..." << std::endl
-		<< "[Warning] edit the config file with your java paths" << std::endl;
+	std::cout << "[Warning] json config not found" << '\n'
+		<< "[Warning] creating jvs.json ..." << '\n'
+		<< "[Warning] edit the config file with your java paths" << '\n';
 	nlohmann::json json =
 	{
 		{"8", "C:/Program Files/Zulu/zulu-8"},
-		{"17", "C:/Program Files/Zulu/zulu-17"}
+		{"17", "C:/Program Files/Zulu/zulu-17"},
+		{"install", {
+			{"zulu17", "https://cdn.azul.com/zulu/bin/zulu17.44.53-ca-jdk17.0.8.1-win_x64.zip"},
+			{"zulu8", "https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-jdk8.0.382-win_x64.zip"},
+			{"zulu20", "https://cdn.azul.com/zulu/bin/zulu20.32.11-ca-jdk20.0.2-win_x64.zip"}
+		}}
 	};
 	std::ofstream config(json_path);
 	if (!config)
@@ -35,14 +40,14 @@ nlohmann::json jvs::getJson()
 			&& !createJson()
 		)
 	{
-		std::cerr << "[Error] failed to create jvs.json" << std::endl;
+		std::cerr << "[Error] failed to create jvs.json" << '\n';
 		return json;
 	}
 
 	std::ifstream config(json_path);
 	if (!config)
 	{
-		std::cerr << "[Error] failed to open jvs.json" << std::endl;
+		std::cerr << "[Error] failed to open jvs.json" << '\n';
 		return json;
 	}
 
@@ -52,8 +57,8 @@ nlohmann::json jvs::getJson()
 	}
 	catch (const nlohmann::json::exception& e)
 	{
-		std::cerr << "[Error] failed to parse jvs.json" << std::endl
-			<< "[Error] " << e.what() << std::endl;
+		std::cerr << "[Error] failed to parse jvs.json" << '\n'
+			<< "[Error] " << e.what() << '\n';
 	}
 	config.close();
 	return json;
@@ -97,5 +102,10 @@ std::filesystem::path jvs::getExeDir()
 {
 	char fileName[FILENAME_MAX + 1] = { 0 };
 	GetModuleFileNameA(nullptr, fileName, FILENAME_MAX + 1);
+	for (char& c : fileName)
+	{
+		if (c == '\\')
+			c = '/';
+	}
 	return std::filesystem::path(fileName).parent_path();
 }

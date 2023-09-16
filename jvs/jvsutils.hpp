@@ -1,4 +1,5 @@
-﻿#include <json.hpp>
+﻿#pragma once
+#include <json.hpp>
 
 namespace jvs
 {
@@ -6,4 +7,6 @@ namespace jvs
 	nlohmann::json getJson();
 	std::string removeExistingJavaPath();
 	std::filesystem::path getExeDir();
+
+	extern const std::string json_path;
 }

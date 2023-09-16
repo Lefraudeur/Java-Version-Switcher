@@ -1,4 +1,5 @@
-﻿#include <string>
+﻿#pragma once
+#include <string>
 #include <curl/curl.h>
 #include <filesystem>
 #include <iostream>

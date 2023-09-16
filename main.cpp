@@ -1,11 +1,13 @@
 ﻿#include <iostream>
 #include "jvs/jvs.hpp"
 
+
 int main(int size, char* args[])
 {
+	SetConsoleOutputCP(CP_UTF8);
 	if (size < 2)
 	{
-		std::cerr << "Usage: jvs <javaVersion>" << std::endl;
+		std::cerr << "Usage: jvs <javaVersion>" << '\n';
 		return -1;
 	}
 
@@ -13,7 +15,7 @@ int main(int size, char* args[])
 	{
 		if (size != 3)
 		{
-			std::cerr << "Usage: jvs install <javaVersion>" << std::endl;
+			std::cerr << "Usage: jvs install <javaVersion>" << '\n';
 			return -1;
 		}
 		if (jvs::handleDownload(args[2]))
@@ -32,6 +34,6 @@ int main(int size, char* args[])
 		|| !jvs::setJavaHome(proc, path)
 	) 
 		return -1;
-	std::cout << "[Success] Java version switched to " << args[1] << std::endl;
+	std::cout << "[Success] Java version switched to " << args[1] << '\n';
 	return 0;
 }

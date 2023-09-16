@@ -1,4 +1,4 @@
-
+﻿
 #ifndef INDICATORS_COLOR
 #define INDICATORS_COLOR
 

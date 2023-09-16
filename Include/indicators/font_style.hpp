@@ -1,4 +1,4 @@
-
+﻿
 #ifndef INDICATORS_FONT_STYLE
 #define INDICATORS_FONT_STYLE
 

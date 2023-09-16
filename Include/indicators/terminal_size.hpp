@@ -1,4 +1,4 @@
-
+﻿
 #ifndef INDICATORS_TERMINAL_SIZE
 #define INDICATORS_TERMINAL_SIZE
 #include <utility>

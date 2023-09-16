@@ -1,4 +1,4 @@
-
+﻿
 #ifndef INDICATORS_MULTI_PROGRESS
 #define INDICATORS_MULTI_PROGRESS
 #include <atomic>
